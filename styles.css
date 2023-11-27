@@ -1,0 +1,65 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+}
+
+#contadorBrasil,
+#contadorBariloche {
+  flex: 1;
+  padding: 10px;
+  color: yellow !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.3s ease; /* Añade una transición de 0.3 segundos para el filtro */
+}
+
+#contadorBrasil:hover {
+  filter: grayscale(100%); /* Escala de grises al hacer hover sobre Brasil */
+}
+
+#contadorBariloche:hover {
+  filter: grayscale(100%); /* Escala de grises al hacer hover sobre Bariloche */
+}
+
+#contadorBrasil h2{
+  font-size: 70px;
+  color: white !important;
+  text-shadow: 2px 2px 4px blue !important;
+  margin-bottom: 10px;
+}
+
+#contadorBariloche h2 {
+  font-size: 60px;
+  color: yellow !important;
+  text-shadow: 2px 2px 4px black !important;
+  margin-bottom: 10px;
+}
+
+#contadorBrasil h1{
+  color: yellow !important;
+  font-size: 28px;
+  margin-top: 20px;
+}
+
+#contadorBariloche h1 {
+  color: black !important;
+  text-shadow: 2px 2px 4px white !important;
+  font-size: 28px;
+  margin-top: 20px;
+}
+
+#contadorBrasil {
+  background: url('https://www.vivepipa.com//data/imagenes/2018/11/15/533/1542288121-Praia_da_Ponta_Negra_20150814-DSC05653.JPG') no-repeat center center;
+  background-size: cover;
+}
+
+#contadorBariloche {
+  background: url('https://cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/EO3GWKQACVG5TNRP2ZFANZWVSY.jpg') no-repeat center center;
+  background-size: cover;
+}
