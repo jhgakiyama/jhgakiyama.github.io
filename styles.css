@@ -55,11 +55,11 @@ body {
 }
 
 #contadorBrasil {
-  background: url('https://www.vivepipa.com//data/imagenes/2018/11/15/533/1542288121-Praia_da_Ponta_Negra_20150814-DSC05653.JPG') no-repeat center center;
+  background: url('natal.jpg') no-repeat center center;
   background-size: cover;
 }
 
 #contadorBariloche {
-  background: url('https://cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/EO3GWKQACVG5TNRP2ZFANZWVSY.jpg') no-repeat center center;
+  background: url('bariloche.jpg') no-repeat center center;
   background-size: cover;
 }
