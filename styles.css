@@ -10,27 +10,24 @@ html,body {
   margin:0;
 }
 
-.hero {
-  position:relative;
-  height:72vh;
-  min-height:380px;
-  border-radius:8px;
-  overflow:hidden;
-  box-shadow:0 6px 18px rgba(0,0,0,0.12);
-}
-
-.swiper-slide {
+/* Asegura que <img> cubra el slide */
+.swiper-slide { display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.swiper-slide img {
   width:100%;
   height:100%;
-  background-position:center;
-  background-size:cover;
-  transition:transform 6s cubic-bezier(.2,.8,.2,1),opacity .9s ease;
+  object-fit:cover;
+  display:block;
+  user-select:none;
+  -webkit-user-drag:none;
   transform-origin:center center;
+  transition: transform 6s cubic-bezier(.2,.8,.2,1), opacity .9s ease;
 }
-.swiper-slide-active {
-  transform:scale(1.12);
-  opacity:1;
-}
+.swiper-slide-active img { transform: scale(1.12); opacity:1; }
+.swiper-slide-next img,
+.swiper-slide-prev img { transform: scale(1); opacity:.95; }
+
+/* fuerza fondo oscuro si la imagen tarda en cargar */
+.hero { background: linear-gradient(180deg,#e6f7f9,#dff3f5); }
 
 @keyframes fadeUp {
   0%{opacity:0;transform:translate(-50%,-42%)}
@@ -92,3 +89,4 @@ footer {
   .countdown-segment {min-width:48px;padding:8px 10px}
   .countdown-card h1 {font-size:16px}
 }
+
