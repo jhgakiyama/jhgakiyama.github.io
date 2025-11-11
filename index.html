@@ -8,41 +8,67 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 <main class="container">
   <section class="hero">
-
-    <div class="swiper mySwiper">
+    <div class="swiper mySwiper" aria-label="Carrusel de imágenes de Salvador">
       <div class="swiper-wrapper">
-
-  <!-- imagen 1 -->
-    <div class="swiper-slide" style="background-image:url('https://images.pexels.com/photos/2868242/pexels-photo-2868242.jpeg?auto=compress&fit=crop&w=1600&q=80')"></div>
-
-    <!-- imagen 2 -->
-    <div class="swiper-slide" style="background-image:url('https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&fit=crop&w=1600&q=80')"></div>
-
-    <!-- imagen 3 -->
-    <div class="swiper-slide" style="background-image:url('https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&fit=crop&w=1600&q=80')"></div>
-
-
+        <div class="swiper-slide">
+          <img loading="lazy"
+               src="https://images.unsplash.com/photo-1508817628299-6b1e6b53e4c2?auto=format&fit=crop&w=1200&q=80"
+               srcset="https://images.unsplash.com/photo-1508817628299-6b1e6b53e4c2?auto=format&fit=crop&w=600&q=60 600w,
+                       https://images.unsplash.com/photo-1508817628299-6b1e6b53e4c2?auto=format&fit=crop&w=1200&q=80 1200w,
+                       https://images.unsplash.com/photo-1508817628299-6b1e6b53e4c2?auto=format&fit=crop&w=2000&q=80 2000w"
+               alt="Playa en Salvador de Bahía" />
+        </div>
+        <div class="swiper-slide">
+          <img loading="lazy"
+               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80"
+               srcset="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=60 600w,
+                       https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80 1200w,
+                       https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=2000&q=80 2000w"
+               alt="Costa de Salvador" />
+        </div>
+        <div class="swiper-slide">
+          <img loading="lazy"
+               src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1200&q=80"
+               srcset="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=600&q=60 600w,
+                       https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1200&q=80 1200w,
+                       https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=2000&q=80 2000w"
+               alt="Atardecer en Salvador" />
+        </div>
+        <div class="swiper-slide">
+          <img loading="lazy"
+               src="https://images.unsplash.com/photo-1549887534-4c0bd0e3f5a6?auto=format&fit=crop&w=1200&q=80"
+               srcset="https://images.unsplash.com/photo-1549887534-4c0bd0e3f5a6?auto=format&fit=crop&w=600&q=60 600w,
+                       https://images.unsplash.com/photo-1549887534-4c0bd0e3f5a6?auto=format&fit=crop&w=1200&q=80 1200w,
+                       https://images.unsplash.com/photo-1549887534-4c0bd0e3f5a6?auto=format&fit=crop&w=2000&q=80 2000w"
+               alt="Iglesia histórica en Salvador" />
+        </div>
+        <div class="swiper-slide">
+          <img loading="lazy"
+               src="https://images.unsplash.com/photo-1505765059513-1c5d5d1d0f9b?auto=format&fit=crop&w=1200&q=80"
+               srcset="https://images.unsplash.com/photo-1505765059513-1c5d5d1d0f9b?auto=format&fit=crop&w=600&q=60 600w,
+                       https://images.unsplash.com/photo-1505765059513-1c5d5d1d0f9b?auto=format&fit=crop&w=1200&q=80 1200w,
+                       https://images.unsplash.com/photo-1505765059513-1c5d5d1d0f9b?auto=format&fit=crop&w=2000&q=80 2000w"
+               alt="Playas y palmeras" />
+        </div>
       </div>
-
       <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev" aria-label="Anterior"></div>
+      <div class="swiper-button-next" aria-label="Siguiente"></div>
     </div>
 
-    <div class="countdown-card">
+    <div class="countdown-card" id="countdown">
       <h1>Faltan</h1>
       <div class="countdown-timer">
-        <div class="countdown-segment"><div class="num" id="days">0</div><div class="label">días</div></div>
-        <div class="countdown-segment"><div class="num" id="hours">0</div><div class="label">horas</div></div>
-        <div class="countdown-segment"><div class="num" id="minutes">0</div><div class="label">minutos</div></div>
-        <div class="countdown-segment"><div class="num" id="seconds">0</div><div class="label">segundos</div></div>
+        <div class="countdown-segment"><div class="num" id="days">00</div><div class="label">días</div></div>
+        <div class="countdown-segment"><div class="num" id="hours">00</div><div class="label">horas</div></div>
+        <div class="countdown-segment"><div class="num" id="minutes">00</div><div class="label">minutos</div></div>
+        <div class="countdown-segment"><div class="num" id="seconds">00</div><div class="label">segundos</div></div>
       </div>
     </div>
 
@@ -69,7 +95,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
-
