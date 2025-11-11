@@ -1,16 +1,98 @@
 :root {
-  --accent:#0097a7;
-  --overlay-bg:rgba(0,0,0,0.45);
+  --accent: #0097a7;
+  --overlay-bg: rgba(0,0,0,0.45);
+  --control-bg: rgba(255,255,255,0.06);
+  --control-border: rgba(255,255,255,0.12);
 }
 
-html,body {
-  height:100%;
-  font-family:Roboto,Arial,sans-serif;
-  background:#fafafa;
-  margin:0;
+/* Base */
+html, body {
+  height: 100%;
+  font-family: Roboto, sans-serif;
+  background: #fafafa;
+  margin: 0;
 }
 
-/* Asegura que <img> cubra el slide */
+/* Top countdown (fuera del hero) */
+.countdown-top {
+  position: relative;
+  transform: none !important;
+  left: auto;
+  top: auto;
+  margin: 18px auto;
+  max-width: 820px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  /* Elevación Material */
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.04);
+  /* Escala reducida ~12% */
+  transform: scale(0.88);
+}
+
+/* Título pequeño sobre el contador */
+.countdown-title {
+  font-size: 14px;
+  color: rgba(255,255,255,0.92);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* Mantiene el h1 pero más chico para la versión top */
+.countdown-top h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* Timer layout */
+.countdown-timer {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.countdown-segment {
+  min-width: 52px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255,255,255,0.03);
+  text-align: center;
+}
+
+.countdown-segment .num {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.countdown-segment .label {
+  font-size: 11px;
+  opacity: 0.95;
+}
+
+/* Hero / carousel */
+.hero {
+  position: relative;
+  height: 66vh;
+  min-height: 340px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  background: linear-gradient(180deg,#e6f7f9,#dff3f5);
+}
+
+/* Swiper images */
 .swiper-slide { display:flex; align-items:center; justify-content:center; overflow:hidden; }
 .swiper-slide img {
   width:100%;
@@ -23,70 +105,41 @@ html,body {
   transition: transform 6s cubic-bezier(.2,.8,.2,1), opacity .9s ease;
 }
 .swiper-slide-active img { transform: scale(1.12); opacity:1; }
-.swiper-slide-next img,
-.swiper-slide-prev img { transform: scale(1); opacity:.95; }
+.swiper-slide-next img, .swiper-slide-prev img { transform: scale(1); opacity:.95; }
 
-/* fuerza fondo oscuro si la imagen tarda en cargar */
-.hero { background: linear-gradient(180deg,#e6f7f9,#dff3f5); }
-
-@keyframes fadeUp {
-  0%{opacity:0;transform:translate(-50%,-42%)}
-  100%{opacity:1;transform:translate(-50%,-50%)}
+/* Small controls / audio pill reuse (if present) */
+.audio-control {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--control-bg);
+  border-radius: 999px;
+  padding: 8px 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border: 1px solid var(--control-border);
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .14s ease, box-shadow .14s ease;
+  backdrop-filter: blur(6px);
+  font-size: 14px;
 }
+.audio-control .icon { font-family: 'Material Icons'; font-size: 20px; }
+.audio-control .pill { width:8px;height:8px;border-radius:50%;background:#fff;opacity:.7;box-shadow:0 0 8px rgba(0,0,0,0.2);transform:scale(.95); }
 
-.countdown-card {
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  background:var(--overlay-bg);
-  backdrop-filter:blur(6px);
-  color:#fff;
-  padding:18px;
-  border-radius:12px;
-  min-width:280px;
-  text-align:center;
-  box-shadow:0 8px 30px rgba(0,0,0,0.35);
-  opacity:0;
-  animation:fadeUp 1.2s ease-out forwards;
+/* Responsive tweaks */
+@media (max-width:900px){
+  .countdown-top { max-width: 92%; transform: scale(0.92); padding:10px; }
+  .countdown-segment .num { font-size: 14px; }
+  .countdown-top h1 { font-size: 16px; }
 }
-
-.countdown-timer {
-  display:flex;
-  gap:8px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-.countdown-segment {
-  min-width:62px;
-  padding:10px 12px;
-  border-radius:8px;
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(2px);
-  border:1px solid rgba(255,255,255,0.03);
-}
-
-.countdown-segment .num {
-  font-size:20px;
-  font-weight:600;
-}
-
-.countdown-segment .label {
-  font-size:12px;
-  opacity:.9;
-}
-
-footer {
-  margin-top:28px;
-  padding:18px 0;
-  text-align:center;
-  color:#666;
-}
-
 @media (max-width:600px){
-  .countdown-card {min-width:220px;padding:12px}
-  .countdown-segment {min-width:48px;padding:8px 10px}
-  .countdown-card h1 {font-size:16px}
+  .countdown-top { transform: scale(1); padding:8px; gap:6px; }
+  .countdown-title { font-size:13px; }
+  .countdown-segment { min-width:44px;padding:6px 8px;}
+  .countdown-segment .num { font-size:13px; }
 }
-
