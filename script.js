@@ -24,7 +24,7 @@ function tick(){
 tick();
 setInterval(tick,1000);
 
-// Swiper init (unchanged)
+// Swiper init
 const swiper = new Swiper('.mySwiper',{
   loop: true,
   autoplay: { delay: 4500, disableOnInteraction: false },
