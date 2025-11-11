@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salvador de Bahía</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salvador de Bahía - Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<header>
-    <div class="card titulo-card">
-        <h2>Salvador de Bahía</h2>
-        <p>Página estática para GitHub Pages</p>
+<div class="countdown-container">
+  <div class="countdown-box">
+    <div class="countdown-segment">
+      <div id="days" class="countdown-number">00</div>
+      <div class="countdown-label">DÍAS</div>
     </div>
+    <div class="countdown-segment">
+      <div id="hours" class="countdown-number">00</div>
+      <div class="countdown-label">HORAS</div>
+    </div>
+    <div class="countdown-segment">
+      <div id="minutes" class="countdown-number">00</div>
+      <div class="countdown-label">MIN</div>
+    </div>
+    <div class="countdown-segment">
+      <div id="seconds" class="countdown-number">00</div>
+      <div class="countdown-label">SEG</div>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="card titulo-card">
+    <h2>Salvador de Bahía</h2>
+    <p>Página estática para GitHub Pages</p>
+  </div>
 </header>
 
-<div id="countdown" class="countdown-card card"></div>
-
-<div class="carousel-container card">
-    <div class="carousel">
-        <button class="carousel-btn prev">&#10094;</button>
-        <img id="carousel-image" src="" alt="Imagen de Salvador">
-        <button class="carousel-btn next">&#10095;</button>
-    </div>
-    <div class="dots" id="carousel-dots"></div>
-</div>
-
-<div class="card info-card">
+<main>
+  <div class="card info-card">
     <h3>Info</h3>
     <p><strong>Fecha de partida:</strong> 13/03/2026</p>
-</div>
+  </div>
+</main>
 
 <script src="script.js"></script>
 </body>
