@@ -52,14 +52,24 @@ html[data-theme="dark"] .card {
 /* BOTÓN DE MODO */
 .theme-toggle {
   position: absolute;
-  right: 20px;
-  top: 20px;
-  background: transparent;
+  right: 18px;
+  top: 18px;
+  background: white;            /* En modo claro botón blanco */
+  color: black;
+  border-radius: 50%;
   border: none;
-  color: white;
-  font-size: 24px;
+  padding: 8px;
   cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+  transition: background .3s, color .3s;
 }
+
+/* Cuando está activo el dark mode */
+html[data-theme="dark"] .theme-toggle {
+  background: black;           /* En modo oscuro botón negro */
+  color: white;
+}
+
 
 /* CONTADOR ARRIBA */
 .countdown-container {
@@ -98,10 +108,22 @@ html[data-theme="dark"] .card {
 /* HERO / CARRUSEL */
 .hero {
   width: 100%;
-  height: 60vh;
-  min-height: 320px;
+  height: auto;
+  max-height: 60vh;
+  min-height: 280px;
   overflow: hidden;
+  margin-bottom: 16px;      /* Saca el espacio gigante */
 }
+
+.swiper {
+  height: 100%;
+}
+
+.swiper-wrapper,
+.swiper-slide {
+  height: 100%;
+}
+
 .swiper-slide { display:flex; justify-content:center; align-items:center; }
 .swiper-slide img {
   width:100%;
