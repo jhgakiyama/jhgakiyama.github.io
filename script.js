@@ -36,7 +36,10 @@ toggleBtn.addEventListener('click', () => {
   const current = htmlEl.getAttribute('data-theme');
   const next    = current === 'light' ? 'dark' : 'light';
   htmlEl.setAttribute('data-theme', next);
-  toggleBtn.innerHTML = next === 'dark' ? '<span class="material-icons">dark_mode</span>' : '<span class="material-icons">light_mode</span>';
+  toggleBtn.innerHTML = next === 'dark'
+  ? '<span class="material-icons">dark_mode</span>'
+  : '<span class="material-icons">light_mode</span>';
+
   localStorage.setItem('theme', next);
 });
 // Persistir preferencia
