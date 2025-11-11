@@ -1,92 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Salvador de Bahía - Countdown</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salvador de Bahía</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<main class="container">
-
-  <!-- Countdown moved above carousel -->
-  <div class="countdown-card countdown-top" role="region" aria-label="Cuenta regresiva">
-    <div class="countdown-title">Salimos a Salvador en...</div>
-    <h1>Faltan</h1>
-    <div class="countdown-timer">
-      <div class="countdown-segment"><div class="num" id="days">00</div><div class="label">días</div></div>
-      <div class="countdown-segment"><div class="num" id="hours">00</div><div class="label">horas</div></div>
-      <div class="countdown-segment"><div class="num" id="minutes">00</div><div class="label">minutos</div></div>
-      <div class="countdown-segment"><div class="num" id="seconds">00</div><div class="label">segundos</div></div>
+<header>
+    <div class="card titulo-card">
+        <h2>Salvador de Bahía</h2>
+        <p>Página estática para GitHub Pages</p>
     </div>
-  </div>
+</header>
 
-  <section class="hero">
-    <div class="swiper mySwiper" aria-label="Carrusel de imágenes de Salvador">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img loading="lazy"
-               src="assets/images/farol_da_barra.jpg"
-               srcset="assets/images/farol_da_barra.jpg 1200w"
-               alt="Farol da Barra - Salvador de Bahía" />
-        </div>
-        <div class="swiper-slide">
-          <img loading="lazy"
-               src="assets/images/pelourinho.jpg"
-               srcset="assets/images/pelourinho.jpg 1200w"
-               alt="Pelourinho - Salvador de Bahía" />
-        </div>
-        <div class="swiper-slide">
-          <img loading="lazy"
-               src="assets/images/praia_salvador.jpg"
-               srcset="assets/images/praia_salvador.jpg 1200w"
-               alt="Praia - Salvador de Bahía" />
-        </div>
-        <div class="swiper-slide">
-          <img loading="lazy"
-               src="assets/images/iglesia_salvador.jpg"
-               srcset="assets/images/iglesia_salvador.jpg 1200w"
-               alt="Iglesia en Salvador de Bahía" />
-        </div>
-        <div class="swiper-slide">
-          <img loading="lazy"
-               src="assets/images/playas_palmeras.jpg"
-               srcset="assets/images/playas_palmeras.jpg 1200w"
-               alt="Playas y palmeras - Salvador" />
-        </div>
-      </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev" aria-label="Anterior"></div>
-      <div class="swiper-button-next" aria-label="Siguiente"></div>
+<div id="countdown" class="countdown-card card"></div>
+
+<div class="carousel-container card">
+    <div class="carousel">
+        <button class="carousel-btn prev">&#10094;</button>
+        <img id="carousel-image" src="" alt="Imagen de Salvador">
+        <button class="carousel-btn next">&#10095;</button>
     </div>
-  </section>
+    <div class="dots" id="carousel-dots"></div>
+</div>
 
-  <div class="row">
-    <div class="col s12 m8">
-      <h5>Salvador de Bahía</h5>
-      <p>Página estática para GitHub Pages</p>
-    </div>
-    <div class="col s12 m4">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">Info</span>
-          <p><strong>Fecha de partida:</strong> 13/03/2026</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="card info-card">
+    <h3>Info</h3>
+    <p><strong>Fecha de partida:</strong> 13/03/2026</p>
+</div>
 
-  <footer>GitHub Pages</footer>
-</main>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
