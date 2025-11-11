@@ -1,103 +1,76 @@
 :root {
-    --brasil-green: #009739;
-    --brasil-yellow: #FFCC29;
-    --brasil-blue: #002776;
-    --shadow: rgba(0,0,0,0.22);
+  --brasil-green: #009C3B;
+  --brasil-yellow: #FFDF00;
+  --brasil-blue:  #002776;
+  --shadow: rgba(0,0,0,0.22);
 }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f1f5f4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  background: #f1f5f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* TARJETAS */
 .card {
-    background: white;
-    padding: 14px 18px;
-    margin: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px var(--shadow);
-    width: 90%;
-    max-width: 1100px;
+  background: white;
+  padding: 16px 20px;
+  margin: 14px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow);
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
 }
 
 /* TITULO */
 .titulo-card {
-    text-align: center;
-    font-weight: bold;
-    background: var(--brasil-blue);
-    color: white;
+  background: var(--brasil-blue);
+  color: white;
 }
 
-/* COUNTDOWN */
-.countdown-card {
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: white;
-    background: var(--brasil-green);
+/* CONTADOR ARRIBA */
+.countdown-container {
+  width: 100%;
+  background: var(--brasil-green);
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  text-align: center;
 }
 
-/* CAROUSEL */
-.carousel-container {
-    overflow: hidden;
-    padding: 0;
+.countdown-box {
+  display: inline-flex;
+  gap: 12px;
+  background: rgba(0,0,0,0.45);
+  padding: 10px 14px;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
 }
 
-.carousel {
-    position: relative;
+.countdown-segment {
+  min-width: 58px;
+  padding: 8px 10px;
+  text-align: center;
 }
 
-.carousel img {
-    width: 100%;
-    height: 450px;
-    object-fit: cover;
+.countdown-number {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
 }
 
-/* BOTONES */
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--brasil-yellow);
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 22px;
-    border-radius: 50%;
-}
-
-/* DOTS */
-.dots {
-    text-align: center;
-    padding: 10px;
-}
-
-.dots span {
-    height: 10px;
-    width: 10px;
-    background-color: var(--brasil-blue);
-    display: inline-block;
-    border-radius: 50%;
-    margin: 3px;
-    opacity: .3;
-    cursor: pointer;
-}
-
-.dots .active {
-    opacity: 1;
+.countdown-label {
+  font-size: 11px;
+  color: var(--brasil-yellow);
+  opacity: 0.9;
 }
 
 /* INFO CARD */
 .info-card {
-    font-size: 15px;
-}
-
-/* Elimina el espacio celeste debajo del carrusel */
-.carousel-container {
-    background: none;
+  font-size: 15px;
 }
