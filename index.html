@@ -1,42 +1,48 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Salvador de Bahía - Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="countdown-container">
-  <div class="countdown-box">
-    <div class="countdown-segment">
-      <div id="days" class="countdown-number">00</div>
-      <div class="countdown-label">DÍAS</div>
-    </div>
-    <div class="countdown-segment">
-      <div id="hours" class="countdown-number">00</div>
-      <div class="countdown-label">HORAS</div>
-    </div>
-    <div class="countdown-segment">
-      <div id="minutes" class="countdown-number">00</div>
-      <div class="countdown-label">MIN</div>
-    </div>
-    <div class="countdown-segment">
-      <div id="seconds" class="countdown-number">00</div>
-      <div class="countdown-label">SEG</div>
-    </div>
-  </div>
-</div>
-
-<header>
+<header class="header">
   <div class="card titulo-card">
     <h2>Salvador de Bahía</h2>
     <p>Página estática para GitHub Pages</p>
   </div>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Alternar modo claro/oscuro">
+    <span class="material-icons">light_mode</span>
+  </button>
 </header>
+
+<div class="countdown-container">
+  <div class="countdown-box">
+    <div class="countdown-segment"><div id="days" class="countdown-number">00</div><div class="countdown-label">DÍAS</div></div>
+    <div class="countdown-segment"><div id="hours" class="countdown-number">00</div><div class="countdown-label">HORAS</div></div>
+    <div class="countdown-segment"><div id="minutes" class="countdown-number">00</div><div class="countdown-label">MIN</div></div>
+    <div class="countdown-segment"><div id="seconds" class="countdown-number">00</div><div class="countdown-label">SEG</div></div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="assets/images/salvador1.jpg" alt="Imagen Salvador 1"></div>
+      <div class="swiper-slide"><img src="assets/images/salvador2.jpg" alt="Imagen Salvador 2"></div>
+      <div class="swiper-slide"><img src="assets/images/salvador3.jpg" alt="Imagen Salvador 3"></div>
+      <div class="swiper-slide"><img src="assets/images/salvador4.jpg" alt="Imagen Salvador 4"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev" aria-label="Anterior"></div>
+    <div class="swiper-button-next" aria-label="Siguiente"></div>
+  </div>
+</section>
 
 <main>
   <div class="card info-card">
@@ -45,6 +51,7 @@
   </div>
 </main>
 
+<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
