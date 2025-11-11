@@ -1,14 +1,27 @@
 :root {
   --brasil-green: #009C3B;
   --brasil-yellow: #FFDF00;
-  --brasil-blue:  #002776;
+  --brasil-blue: #002776;
+  --light-bg: #f1f5f4;
+  --light-text: #333333;
+  --dark-bg: #121212;
+  --dark-text: #f0f0f0;
   --shadow: rgba(0,0,0,0.22);
+}
+
+/* Tema claro por defecto */
+html[data-theme="light"] {
+  background: var(--light-bg);
+  color: var(--light-text);
+}
+html[data-theme="dark"] {
+  background: var(--dark-bg);
+  color: var(--dark-text);
 }
 
 body {
   margin: 0;
   font-family: Roboto, sans-serif;
-  background: #f1f5f4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,11 +38,27 @@ body {
   max-width: 900px;
   text-align: center;
 }
+html[data-theme="dark"] .card {
+  background: #1e1e1e;
+}
 
 /* TITULO */
 .titulo-card {
   background: var(--brasil-blue);
   color: white;
+  position: relative;
+}
+
+/* BOTÓN DE MODO */
+.theme-toggle {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 /* CONTADOR ARRIBA */
@@ -42,7 +71,6 @@ body {
   z-index: 9999;
   text-align: center;
 }
-
 .countdown-box {
   display: inline-flex;
   gap: 12px;
@@ -51,26 +79,51 @@ body {
   border-radius: 10px;
   backdrop-filter: blur(6px);
 }
-
 .countdown-segment {
   min-width: 58px;
   padding: 8px 10px;
   text-align: center;
 }
-
 .countdown-number {
   font-size: 20px;
   font-weight: bold;
   color: white;
 }
-
 .countdown-label {
   font-size: 11px;
   color: var(--brasil-yellow);
   opacity: 0.9;
 }
 
+/* HERO / CARRUSEL */
+.hero {
+  width: 100%;
+  height: 60vh;
+  min-height: 320px;
+  overflow: hidden;
+}
+.swiper-slide { display:flex; justify-content:center; align-items:center; }
+.swiper-slide img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition: transform 6s ease-in-out, opacity 1s ease;
+}
+.swiper-slide-active img { transform: scale(1.12); opacity:1; }
+
 /* INFO CARD */
 .info-card {
   font-size: 15px;
+}
+
+/* Adaptaciones modo oscuro de texto interno etc */
+html[data-theme="dark"] .titulo-card {
+  background: #0a1b3a;
+}
+
+/* Responsive */
+@media (max-width:600px){
+  .countdown-box { gap:8px; }
+  .countdown-number { font-size:16px; }
+  .countdown-label { font-size:10px; }
 }
