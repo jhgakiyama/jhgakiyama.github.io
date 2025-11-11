@@ -1,36 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salvador de Bahía - Countdown</title>
+
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Materialize (Material Design) CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+
+  <!-- Swiper (carousel) -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
+
+  <!-- CSS propio -->
   <link rel="stylesheet" href="styles.css">
-  <title>Contador de días para viajar</title>
 </head>
+
 <body>
-<div class="container-fluid">
+
+<main class="container">
+  <section class="hero">
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image:url('https://images.unsplash.com/photo-1508817628299-6b1e6b53e4c2?auto=format&fit=crop&w=1600&q=80')"></div>
+        <div class="swiper-slide" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80')"></div>
+        <div class="swiper-slide" style="background-image:url('https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=1600&q=80')"></div>
+        <div class="swiper-slide" style="background-image:url('https://images.unsplash.com/photo-1549887534-4c0bd0e3f5a6?auto=format&fit=crop&w=1600&q=80')"></div>
+        <div class="swiper-slide" style="background-image:url('https://images.unsplash.com/photo-1505765059513-1c5d5d1d0f9b?auto=format&fit=crop&w=1600&q=80')"></div>
+      </div>
+
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+    <div class="countdown-card" id="countdown">
+      <h1>Faltan</h1>
+      <div class="countdown-timer">
+        <div class="countdown-segment"><div class="num" id="days">0</div><div class="label">días</div></div>
+        <div class="countdown-segment"><div class="num" id="hours">0</div><div class="label">horas</div></div>
+        <div class="countdown-segment"><div class="num" id="minutes">0</div><div class="label">minutos</div></div>
+        <div class="countdown-segment"><div class="num" id="seconds">0</div><div class="label">segundos</div></div>
+      </div>
+    </div>
+
+  </section>
+
   <div class="row">
-	<div class="col-lg-6 col-md-12">
-
-	  <div class="contador" id="contadorBrasil">
-		<h2>Natal</h2>
-		<h1 id="contadorBrasilText"></h1>
-	  </div>
-	</div>
-	
-	<div class="col-lg-6 col-md-12">
-	  <div class="contador" id="contadorBariloche">
-		<h2>Bariloche</h2>
-		<h1 id="contadorBarilocheText"></h1>
-	  </div>
-	</div>
+    <div class="col s12 m8">
+      <h5>Salvador de Bahía</h5>
+      <p>Guía rápida y fotos. Página estática para GitHub Pages.</p>
+    </div>
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Info de viaje</span>
+          <p><strong>Fecha de partida:</strong> 13/03/2026</p>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
+  <footer>
+    Hecho para GitHub Pages (index.html)
+  </footer>
+</main>
 
-  <!-- Script de Bootstrap (puedes incluirlo al final del body para mejorar el rendimiento) -->
-  <script src="script.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
