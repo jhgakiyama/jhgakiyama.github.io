@@ -1,37 +1,25 @@
-// Fecha objetivo
-const TARGET_ISO = '2026-03-13T00:00:00-03:00';
-const targetDate = new Date(TARGET_ISO);
+const TARGET = new Date('2026-03-13T00:00:00-03:00');
 
-function updateCountdown() {
-  const now = new Date();
-  let diff = Math.floor((targetDate - now) / 1000);
-  if (diff < 0) diff = 0;
+function tick() {
+  let sec = Math.max(0, Math.floor((TARGET - new Date()) / 1000));
+  const d = Math.floor(sec / 86400); sec -= d * 86400;
+  const h = Math.floor(sec / 3600); sec -= h * 3600;
+  const m = Math.floor(sec / 60);
+  const s = sec - m * 60;
 
-  const days = Math.floor(diff / (3600 * 24));
-  diff -= days * 3600 * 24;
-  const hours = Math.floor(diff / 3600);
-  diff -= hours * 3600;
-  const minutes = Math.floor(diff / 60);
-  const seconds = diff - minutes * 60;
-
-  document.getElementById('days').textContent = String(days).padStart(2,'0');
-  document.getElementById('hours').textContent = String(hours).padStart(2,'0');
-  document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
-  document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
+  document.getElementById('days').textContent = String(d).padStart(2,'0');
+  document.getElementById('hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(s).padStart(2,'0');
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+tick();
+setInterval(tick, 1000);
 
-const swiper = new Swiper('.mySwiper', {
+new Swiper('.mySwiper', {
   loop: true,
   autoplay: { delay: 4500, disableOnInteraction: false },
   pagination: { el: '.swiper-pagination', clickable: true },
   navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-  effect: 'slide',
-  speed: 700,
+  speed: 700
 });
-
-const swiperEl = document.querySelector('.mySwiper');
-swiperEl.addEventListener('mouseenter', () => swiper.autoplay.stop());
-swiperEl.addEventListener('mouseleave', () => swiper.autoplay.start());
