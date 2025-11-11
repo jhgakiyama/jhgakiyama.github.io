@@ -1,103 +1,103 @@
-:root{
-  --brasil-green: #009C3B;   /* verde bandera */
-  --brasil-yellow:#FFDF00;   /* amarillo bandera */
-  --brasil-blue:  #002776;   /* azul bandera */
-  --card-bg:       #ffffff;
-  --muted: rgba(0,0,0,0.65);
+:root {
+    --brasil-green: #009739;
+    --brasil-yellow: #FFCC29;
+    --brasil-blue: #002776;
+    --shadow: rgba(0,0,0,0.22);
 }
 
-/* Base */
-html,body{height:100%;font-family:Roboto, sans-serif;background:#f5f7f8;margin:0;color:var(--muted)}
-
-/* Top countdown (fuera del hero) */
-.countdown-top{
-  position:relative;
-  transform:none !important;
-  left:auto; top:auto;
-  margin:18px auto;
-  max-width:880px;
-  padding:12px 18px;
-  border-radius:12px;
-  /* ahora fondo blanco para contraste */
-  background: var(--card-bg);
-  color: var(--brasil-blue);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.28);
-  backdrop-filter: blur(6px);
-  border-left:6px solid var(--brasil-yellow); /* tira amarilla lateral */
-  border: 1px solid rgba(0,0,0,0.06);
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Título sobre el contador */
-.countdown-title{
-  font-size:13px;
-  color: var(--brasil-green);
-  font-weight:600;
-  letter-spacing:0.2px;
+/* TARJETAS */
+.card {
+    background: white;
+    padding: 14px 18px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow);
+    width: 90%;
+    max-width: 1100px;
 }
 
-/* h1 reducida y en azul contrastante */
-.countdown-top h1{
-  margin:0;
-  font-size:18px;
-  font-weight:600;
-  color:var(--brasil-blue);
+/* TITULO */
+.titulo-card {
+    text-align: center;
+    font-weight: bold;
+    background: var(--brasil-blue);
+    color: white;
 }
 
-/* Timer layout */
-.countdown-timer{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding-top:4px}
-.countdown-segment{
-  min-width:60px;
-  padding:8px 12px;
-  border-radius:8px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01));
-  border:1px solid rgba(0,0,0,0.04);
-  text-align:center;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
-}
-.countdown-segment .num{font-size:18px;font-weight:700;color:var(--brasil-blue)}
-.countdown-segment .label{font-size:11px;color:var(--brasil-green);opacity:0.95}
-
-/* Hero / carousel */
-.hero{
-  position:relative;
-  height:66vh;
-  min-height:340px;
-  border-radius:8px;
-  overflow:hidden;
-  box-shadow:0 6px 18px rgba(0,0,0,0.12);
-  background: linear-gradient(180deg,#e6f7f9,#dff3f5);
+/* COUNTDOWN */
+.countdown-card {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    background: var(--brasil-green);
 }
 
-/* Swiper images */
-.swiper-slide{display:flex;align-items:center;justify-content:center;overflow:hidden}
-.swiper-slide img{
-  width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none;
-  transform-origin:center center;
-  transition: transform 6s cubic-bezier(.2,.8,.2,1), opacity .9s ease;
+/* CAROUSEL */
+.carousel-container {
+    overflow: hidden;
+    padding: 0;
 }
-.swiper-slide-active img{transform:scale(1.12);opacity:1}
-.swiper-slide-next img,.swiper-slide-prev img{transform:scale(1);opacity:.95}
 
-/* Audio control (si está presente) */
-.audio-control{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:10px;
-  background:rgba(0,0,0,0.06);border-radius:999px;padding:8px 12px;box-shadow:0 6px 18px rgba(0,0,0,0.12);
-  border:1px solid rgba(0,0,0,0.04);color:#fff;cursor:pointer;font-size:14px}
-.audio-control .icon{font-family:'Material Icons';font-size:20px}
-.audio-control .pill{width:8px;height:8px;border-radius:50%;background:var(--brasil-yellow)}
-
-/* Responsive */
-@media (max-width:900px){
-  .countdown-top{max-width:94%;padding:10px}
-  .countdown-segment .num{font-size:16px}
-  .countdown-top h1{font-size:16px}
+.carousel {
+    position: relative;
 }
-@media (max-width:600px){
-  .countdown-top{padding:10px}
-  .countdown-title{font-size:12px}
-  .countdown-segment{min-width:48px;padding:6px 8px}
-  .countdown-segment .num{font-size:14px}
+
+.carousel img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+
+/* BOTONES */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--brasil-yellow);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    border-radius: 50%;
+}
+
+/* DOTS */
+.dots {
+    text-align: center;
+    padding: 10px;
+}
+
+.dots span {
+    height: 10px;
+    width: 10px;
+    background-color: var(--brasil-blue);
+    display: inline-block;
+    border-radius: 50%;
+    margin: 3px;
+    opacity: .3;
+    cursor: pointer;
+}
+
+.dots .active {
+    opacity: 1;
+}
+
+/* INFO CARD */
+.info-card {
+    font-size: 15px;
+}
+
+/* Elimina el espacio celeste debajo del carrusel */
+.carousel-container {
+    background: none;
 }
