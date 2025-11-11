@@ -1,58 +1,23 @@
-/* IMÁGENES LOCALES (asegúrate de tenerlas en /assets/images/) */
-const images = [
-    "assets/images/salvador1.jpg",
-    "assets/images/salvador2.jpg",
-    "assets/images/salvador3.jpg",
-    "assets/images/salvador4.jpg"
-];
+// Fecha objetivo
+const TARGET_ISO = '2026-03-13T00:00:00-03:00';
+const TARGET = new Date(TARGET_ISO);
 
-let index = 0;
-const img = document.getElementById("carousel-image");
-const dotsContainer = document.getElementById("carousel-dots");
+function updateCountdown(){
+  const now = new Date();
+  let diff = Math.max(0, Math.floor((TARGET - now) / 1000));
 
-/* Render inicial */
-function renderImage() {
-    img.src = images[index];
+  const days = Math.floor(diff / 86400);
+  diff -= days * 86400;
+  const hours = Math.floor(diff / 3600);
+  diff -= hours * 3600;
+  const minutes = Math.floor(diff / 60);
+  const seconds = diff - minutes * 60;
 
-    dotsContainer.innerHTML = "";
-    images.forEach((_, i) => {
-        const dot = document.createElement("span");
-        dot.classList.add(i === index ? "active" : "");
-        dot.addEventListener("click", () => {
-            index = i;
-            renderImage();
-        });
-        dotsContainer.appendChild(dot);
-    });
-}
-
-document.querySelector(".prev").addEventListener("click", () => {
-    index = (index - 1 + images.length) % images.length;
-    renderImage();
-});
-
-document.querySelector(".next").addEventListener("click", () => {
-    index = (index + 1) % images.length;
-    renderImage();
-});
-
-renderImage();
-
-/* COUNTDOWN */
-function updateCountdown() {
-    const target = new Date("March 13, 2026 00:00:00").getTime();
-    const now = Date.now();
-    const diff = target - now;
-
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("countdown").innerHTML =
-        `Faltan ${d} días, ${h}h ${m}m ${s}s`;
-
-    if (diff > 0) setTimeout(updateCountdown, 1000);
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
 }
 
 updateCountdown();
+setInterval(updateCountdown, 1000);
