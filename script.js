@@ -1,54 +1,58 @@
-// CONFIG
-const TARGET_ISO = '2026-03-13T00:00:00-03:00';
+/* IMÁGENES LOCALES (asegúrate de tenerlas en /assets/images/) */
+const images = [
+    "assets/images/salvador1.jpg",
+    "assets/images/salvador2.jpg",
+    "assets/images/salvador3.jpg",
+    "assets/images/salvador4.jpg"
+];
 
-// Countdown
-const TARGET = new Date(TARGET_ISO);
+let index = 0;
+const img = document.getElementById("carousel-image");
+const dotsContainer = document.getElementById("carousel-dots");
 
-function tick(){
-  let d = Math.max(0, Math.floor((TARGET - new Date()) / 1000));
-  const ds = Math.floor(d / 86400); d -= ds * 86400;
-  const hs = Math.floor(d / 3600); d -= hs * 3600;
-  const ms = Math.floor(d / 60); const ss = d - ms * 60;
+/* Render inicial */
+function renderImage() {
+    img.src = images[index];
 
-  const elDays = document.getElementById('days');
-  const elHours = document.getElementById('hours');
-  const elMinutes = document.getElementById('minutes');
-  const elSeconds = document.getElementById('seconds');
-
-  if (elDays) elDays.textContent = String(ds).padStart(2,'0');
-  if (elHours) elHours.textContent = String(hs).padStart(2,'0');
-  if (elMinutes) elMinutes.textContent = String(ms).padStart(2,'0');
-  if (elSeconds) elSeconds.textContent = String(ss).padStart(2,'0');
+    dotsContainer.innerHTML = "";
+    images.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.classList.add(i === index ? "active" : "");
+        dot.addEventListener("click", () => {
+            index = i;
+            renderImage();
+        });
+        dotsContainer.appendChild(dot);
+    });
 }
 
-tick();
-setInterval(tick,1000);
-
-// Swiper init (unchanged)
-const swiper = new Swiper('.mySwiper',{
-  loop: true,
-  autoplay: { delay: 4500, disableOnInteraction: false },
-  pagination: { el: '.swiper-pagination', clickable: true },
-  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-  speed: 700
+document.querySelector(".prev").addEventListener("click", () => {
+    index = (index - 1 + images.length) % images.length;
+    renderImage();
 });
 
-// Accessibility: pause on hover/focus
-const swiperEl = document.querySelector('.mySwiper');
-if (swiperEl) {
-  swiperEl.addEventListener('mouseenter', () => swiper.autoplay.stop());
-  swiperEl.addEventListener('mouseleave', () => swiper.autoplay.start());
-  swiperEl.addEventListener('focusin', () => swiper.autoplay.stop());
-  swiperEl.addEventListener('focusout', () => swiper.autoplay.start());
+document.querySelector(".next").addEventListener("click", () => {
+    index = (index + 1) % images.length;
+    renderImage();
+});
+
+renderImage();
+
+/* COUNTDOWN */
+function updateCountdown() {
+    const target = new Date("March 13, 2026 00:00:00").getTime();
+    const now = Date.now();
+    const diff = target - now;
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countdown").innerHTML =
+        `Faltan ${d} días, ${h}h ${m}m ${s}s`;
+
+    if (diff > 0) setTimeout(updateCountdown, 1000);
 }
 
-// Image error fallback
-document.querySelectorAll('.swiper-slide img').forEach((img, idx) => {
-  img.addEventListener('error', () => {
-    console.error(`Imagen ${idx+1} falló:`, img.src);
-    const fallback = document.createElement('div');
-    fallback.style.cssText = 'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111;color:#fff';
-    fallback.textContent = 'Imagen no disponible';
-    img.replaceWith(fallback);
-  });
-});
+updateCountdown();
