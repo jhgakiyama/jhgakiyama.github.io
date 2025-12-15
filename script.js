@@ -1,5 +1,5 @@
 // CONFIG
-const TARGET_ISO = '2026-03-13T00:00:00-03:00';
+const TARGET_ISO = '2026-03-03T00:00:00-03:00';
 const TARGET = new Date(TARGET_ISO);
 
 // Contador
