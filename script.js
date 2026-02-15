@@ -1,3 +1,7 @@
+/**
+ * Salvador 2026 - Checklist Logic
+ */
+
 const TARGET_DATE = new Date("March 1, 2026 00:00:00").getTime();
 const STORAGE_KEY = 'salvador_2026_checklist_state';
 let successCelebrated = false;
@@ -10,23 +14,19 @@ const tripData = [
     { id: 'bt', title: "Botiquín Niña", icon: "🏥", color: "border-l-red-500", items: ["Termómetro", "Ibuprofeno/Paracet.", "Antihistamínico", "Sales rehidratación", "Curitas/Gasas", "Post-solar/Aloe"] }
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderChecklist();
-    loadProgress();
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-});
-
-function renderChecklist() {
+// Inicialización
+function init() {
     const container = document.getElementById('app-content');
+    if (!container) return;
+
     container.innerHTML = tripData.map(section => `
-        <div class="bg-white rounded-[2rem] shadow-sm border-l-4 ${section.color} overflow-hidden">
-            <div class="p-5 bg-slate-50/50 cursor-pointer flex justify-between items-center" onclick="toggleSection('${section.id}')">
+        <div class="bg-white rounded-[2rem] shadow-sm border-l-4 ${section.color} overflow-hidden border border-slate-100">
+            <div class="p-5 bg-white cursor-pointer flex justify-between items-center active:bg-slate-50 transition-colors" onclick="handleToggle('${section.id}')">
                 <div class="flex items-center gap-4">
                     <span class="text-2xl">${section.icon}</span>
                     <div>
-                        <h3 class="font-bold text-slate-800 text-sm tracking-tight">${section.title}</h3>
-                        <span id="count-${section.id}" class="text-[10px] font-bold text-slate-400">0/0</span>
+                        <h3 class="font-extrabold text-slate-800 text-sm tracking-tight">${section.title}</h3>
+                        <span id="count-${section.id}" class="text-[10px] font-black text-slate-300">0/0</span>
                     </div>
                 </div>
                 <svg id="chevron-${section.id}" class="chevron-icon w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -34,42 +34,49 @@ function renderChecklist() {
                 </svg>
             </div>
             
-            <div id="content-${section.id}" class="section-content">
-                <div class="flex justify-end p-4 pb-0">
-                    <button onclick="checkAll(event, '${section.id}')" class="text-[9px] font-black uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg active:scale-95">
-                        Marcar Todo
-                    </button>
-                </div>
-                <div class="p-2 space-y-1">
-                    ${section.items.map((item, idx) => `
-                        <label class="flex items-center space-x-4 p-4 rounded-2xl hover:bg-blue-50/50 cursor-pointer transition-all">
-                            <input type="checkbox" data-section="${section.id}" data-id="${section.id}-${idx}" onchange="updateState()" class="checkbox-custom">
-                            <span class="text-sm text-slate-700 font-semibold">${item}</span>
-                        </label>
-                    `).join('')}
+            <div id="content-${section.id}" class="accordion-content">
+                <div class="p-4 pt-0">
+                    <div class="flex justify-end mb-2">
+                        <button onclick="checkAll(event, '${section.id}')" class="text-[9px] font-black uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1.5 rounded-xl active:scale-95 transition-all">
+                            Marcar Todo
+                        </button>
+                    </div>
+                    <div class="space-y-1">
+                        ${section.items.map((item, idx) => `
+                            <label class="flex items-center space-x-3 p-3 rounded-2xl hover:bg-slate-50 cursor-pointer transition-all border border-transparent active:border-blue-100">
+                                <input type="checkbox" data-section="${section.id}" data-id="${section.id}-${idx}" onchange="updateState()" class="checkbox-custom">
+                                <span class="text-sm text-slate-600 font-semibold tracking-tight">${item}</span>
+                            </label>
+                        `).join('')}
+                    </div>
                 </div>
             </div>
         </div>
     `).join('');
+
+    loadProgress();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 }
 
-window.toggleSection = (id) => {
+// Lógica de Acordeón
+window.handleToggle = (id) => {
     const content = document.getElementById(`content-${id}`);
     const chevron = document.getElementById(`chevron-${id}`);
     
-    // Cerramos los demás si queremos acordeón real (opcional)
-    // Para esta versión, solo alternamos el actual
-    const isExpanded = content.classList.contains('expanded');
-    
-    if (isExpanded) {
-        content.classList.remove('expanded');
-        chevron.classList.remove('rotated');
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        content.style.maxHeight = '0px';
+        content.classList.remove('is-open');
+        chevron.classList.remove('chevron-rotated');
     } else {
-        content.classList.add('expanded');
-        chevron.classList.add('rotated');
+        // Cálculo dinámico de altura para evitar fallos
+        content.style.maxHeight = content.scrollHeight + "px";
+        content.classList.add('is-open');
+        chevron.classList.add('chevron-rotated');
     }
 };
 
+// Marcar toda una sección
 window.checkAll = (event, sectionId) => {
     event.stopPropagation();
     const checks = document.querySelectorAll(`input[data-section="${sectionId}"]`);
@@ -78,6 +85,7 @@ window.checkAll = (event, sectionId) => {
     updateState();
 };
 
+// Persistencia y Progreso
 function updateState() {
     const checks = Array.from(document.querySelectorAll('input[type="checkbox"]')).map(c => ({
         id: c.getAttribute('data-id'),
@@ -108,7 +116,10 @@ function updateProgressDisplay() {
     const label = document.getElementById('perc-label');
     if (perc === 100) {
         label.classList.add('success-glow');
-        if (!successCelebrated) { showSuccessModal(); successCelebrated = true; }
+        if (!successCelebrated) {
+            showSuccessModal();
+            successCelebrated = true;
+        }
     } else {
         label.classList.remove('success-glow');
         successCelebrated = false;
@@ -117,28 +128,40 @@ function updateProgressDisplay() {
     tripData.forEach(s => {
         const sChecks = document.querySelectorAll(`input[data-section="${s.id}"]`);
         const sChecked = Array.from(sChecks).filter(c => c.checked).length;
-        document.getElementById(`count-${s.id}`).innerText = `${sChecked}/${sChecks.length}`;
+        const countEl = document.getElementById(`count-${s.id}`);
+        if (countEl) countEl.innerText = `${sChecked}/${sChecks.length}`;
     });
 }
 
+// Cuenta regresiva
 function updateCountdown() {
     const now = new Date().getTime();
     const distance = TARGET_DATE - now;
     if (distance < 0) return;
 
-    document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-    document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-    document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-    document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = d.toString().padStart(2, '0');
+    document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
 }
 
-window.showSuccessModal = () => document.getElementById('success-modal').classList.remove('hidden');
-window.closeSuccessModal = () => document.getElementById('success-modal').classList.add('hidden');
-window.showResetModal = () => document.getElementById('reset-modal').classList.remove('hidden');
-window.closeResetModal = () => document.getElementById('reset-modal').classList.add('hidden');
+// Control de Modales
+window.showSuccessModal = () => document.getElementById('success-modal')?.classList.remove('hidden');
+window.closeSuccessModal = () => document.getElementById('success-modal')?.classList.add('hidden');
+window.showResetModal = () => document.getElementById('reset-modal')?.classList.remove('hidden');
+window.closeResetModal = () => document.getElementById('reset-modal')?.classList.add('hidden');
+
 window.confirmReset = () => {
     localStorage.removeItem(STORAGE_KEY);
     document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
     updateProgressDisplay();
     closeResetModal();
 };
+
+// Iniciar aplicación
+window.onload = init;
