@@ -1,151 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+
 :root {
-  --brasil-green: #009C3B;
-  --brasil-yellow: #FFDF00;
-  --brasil-blue: #002776;
-  --light-bg: #f1f5f4;
-  --light-text: #333333;
-  --dark-bg: #121212;
-  --dark-text: #f0f0f0;
-  --shadow: rgba(0,0,0,0.22);
+    --primary: #2563eb;
+    --secondary: #fbbf24;
 }
 
-/* Tema claro por defecto */
-html[data-theme="light"] {
-  background: var(--light-bg);
-  color: var(--light-text);
-}
-html[data-theme="dark"] {
-  background: var(--dark-bg);
-  color: var(--dark-text);
+body { 
+    font-family: 'Inter', sans-serif; 
+    -webkit-tap-highlight-color: transparent; 
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Efecto de tachado en checklist */
+.checkbox-custom:checked + span { 
+    text-decoration: line-through; 
+    color: #94a3b8; 
+    opacity: 0.6; 
 }
 
-/* TARJETAS */
-.card {
-  background: white;
-  padding: 16px 20px;
-  margin: 14px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px var(--shadow);
-  width: 90%;
-  max-width: 900px;
-  text-align: center;
-}
-html[data-theme="dark"] .card {
-  background: #1e1e1e;
+/* Transición suave de la barra de progreso */
+.progress-fill { 
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
 }
 
-/* TITULO */
-.titulo-card {
-  background: var(--brasil-blue);
-  color: white;
-  position: relative;
+/* Acordeón */
+.section-content { 
+    transition: all 0.3s ease-in-out; 
+    max-height: 2000px; 
+    opacity: 1;
+    overflow: hidden; 
 }
 
-/* BOTÓN DE MODO */
-.theme-toggle {
-  position: absolute;
-  right: 18px;
-  top: 18px;
-  background: white;            /* En modo claro botón blanco */
-  color: black;
-  border-radius: 50%;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,.3);
-  transition: background .3s, color .3s;
+.section-content.collapsed { 
+    max-height: 0; 
+    opacity: 0; 
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    pointer-events: none; 
 }
 
-/* Cuando está activo el dark mode */
-html[data-theme="dark"] .theme-toggle {
-  background: black;           /* En modo oscuro botón negro */
-  color: white;
+/* Rotación del Icono */
+.chevron-icon {
+    transition: transform 0.3s ease;
+}
+.collapsed-icon .chevron-icon {
+    transform: rotate(-90deg);
 }
 
-
-/* CONTADOR ARRIBA */
-.countdown-container {
-  width: 100%;
-  background: var(--brasil-green);
-  padding: 12px 0;
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-  text-align: center;
-}
-.countdown-box {
-  display: inline-flex;
-  gap: 12px;
-  background: rgba(0,0,0,0.45);
-  padding: 10px 14px;
-  border-radius: 10px;
-  backdrop-filter: blur(6px);
-}
-.countdown-segment {
-  min-width: 58px;
-  padding: 8px 10px;
-  text-align: center;
-}
-.countdown-number {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-}
-.countdown-label {
-  font-size: 11px;
-  color: var(--brasil-yellow);
-  opacity: 0.9;
+/* Estilo Checkboxes */
+.checkbox-custom {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    width: 1.5em;
+    height: 1.5em;
+    border: 2px solid #cbd5e1;
+    border-radius: 0.5em;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-/* HERO / CARRUSEL */
-.hero {
-  width: 100%;
-  height: auto;
-  max-height: 60vh;
-  min-height: 280px;
-  overflow: hidden;
-  margin-bottom: 16px;      /* Saca el espacio gigante */
+.checkbox-custom::before {
+    content: "";
+    width: 0.85em;
+    height: 0.85em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--primary);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 
-.swiper {
-  height: 100%;
+.checkbox-custom:checked::before {
+    transform: scale(1);
 }
 
-.swiper-wrapper,
-.swiper-slide {
-  height: 100%;
+.checkbox-custom:checked {
+    border-color: var(--primary);
 }
 
-.swiper-slide { display:flex; justify-content:center; align-items:center; }
-.swiper-slide img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition: transform 6s ease-in-out, opacity 1s ease;
-}
-.swiper-slide-active img { transform: scale(1.12); opacity:1; }
-
-/* INFO CARD */
-.info-card {
-  font-size: 15px;
-}
-
-/* Adaptaciones modo oscuro de texto interno etc */
-html[data-theme="dark"] .titulo-card {
-  background: #0a1b3a;
-}
-
-/* Responsive */
-@media (max-width:600px){
-  .countdown-box { gap:8px; }
-  .countdown-number { font-size:16px; }
-  .countdown-label { font-size:10px; }
+/* Animación de 100% */
+.success-glow {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
+    background-color: #fbbf24 !important;
+    color: #1e3a8a !important;
+    transform: scale(1.1);
 }

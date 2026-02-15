@@ -1,57 +1,110 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Salvador de Bahía - Countdown</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Salvador 2026 - Checklist</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/826/826070.png">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-slate-50 min-h-screen flex flex-col items-center">
 
-<header class="header">
-  <div class="card titulo-card">
-    <h2>Salvador de Bahía</h2>
-    <p>Nos vamos en ...</p>
-  </div>
-  <button id="theme-toggle" class="theme-toggle" aria-label="Alternar modo claro/oscuro">
-    <span class="material-icons">light_mode</span>
-  </button>
-</header>
+    <div class="w-full max-w-md bg-white min-h-screen shadow-2xl flex flex-col relative overflow-hidden">
+        
+        <!-- HEADER -->
+        <header class="bg-blue-600 text-white sticky top-0 z-50 shadow-md">
+            <div class="p-5">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h1 class="text-2xl font-extrabold tracking-tight">Salvador 2026 🇧🇷</h1>
+                        <p class="text-blue-100 text-xs font-semibold opacity-90 italic">Preparando el viaje...</p>
+                    </div>
+                </div>
+                
+                <!-- Countdown Widget -->
+                <div class="bg-white/10 rounded-2xl p-4 border border-white/10 mb-4 backdrop-blur-sm">
+                    <p class="text-[10px] uppercase font-black text-blue-200 tracking-widest mb-2 text-center">Faltan para el 1 de Marzo</p>
+                    <div class="grid grid-cols-4 gap-2 text-center">
+                        <div class="bg-blue-900/20 py-2 rounded-xl">
+                            <span id="days" class="block text-xl font-black leading-none">00</span>
+                            <span class="text-[8px] uppercase font-bold opacity-70">Días</span>
+                        </div>
+                        <div class="bg-blue-900/20 py-2 rounded-xl">
+                            <span id="hours" class="block text-xl font-black leading-none">00</span>
+                            <span class="text-[8px] uppercase font-bold opacity-70">Horas</span>
+                        </div>
+                        <div class="bg-blue-900/20 py-2 rounded-xl">
+                            <span id="minutes" class="block text-xl font-black leading-none">00</span>
+                            <span class="text-[8px] uppercase font-bold opacity-70">Min</span>
+                        </div>
+                        <div class="bg-blue-900/20 py-2 rounded-xl">
+                            <span id="seconds" class="block text-xl font-black leading-none text-yellow-400">00</span>
+                            <span class="text-[8px] uppercase font-bold opacity-70 text-yellow-400">Seg</span>
+                        </div>
+                    </div>
+                </div>
 
-<div class="countdown-container">
-  <div class="countdown-box">
-    <div class="countdown-segment"><div id="days" class="countdown-number">00</div><div class="countdown-label">DÍAS</div></div>
-    <div class="countdown-segment"><div id="hours" class="countdown-number">00</div><div class="countdown-label">HORAS</div></div>
-    <div class="countdown-segment"><div id="minutes" class="countdown-number">00</div><div class="countdown-label">MIN</div></div>
-    <div class="countdown-segment"><div id="seconds" class="countdown-number">00</div><div class="countdown-label">SEG</div></div>
-  </div>
-</div>
+                <!-- Barra de Progreso y Porcentaje -->
+                <div class="space-y-2">
+                    <div class="w-full bg-blue-900/30 rounded-full h-2.5 overflow-hidden shadow-inner">
+                        <div id="global-bar" class="bg-yellow-400 h-full progress-fill shadow-[0_0_10px_rgba(251,191,36,0.5)]" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-center">
+                        <p id="perc-label" class="text-[10px] font-bold uppercase tracking-widest text-blue-200 transition-all duration-500">
+                            Equipaje armado <span id="global-perc">0%</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-<section class="hero">
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="assets/images/salvador1.jpg" alt="Imagen Salvador 1"></div>
-      <div class="swiper-slide"><img src="assets/images/salvador2.jpg" alt="Imagen Salvador 2"></div>
-      <div class="swiper-slide"><img src="assets/images/salvador3.jpg" alt="Imagen Salvador 3"></div>
-      <div class="swiper-slide"><img src="assets/images/salvador4.jpg" alt="Imagen Salvador 4"></div>
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div id="app-content" class="space-y-4"></div>
+            
+            <div class="py-10 flex flex-col items-center gap-4">
+                <button onclick="showResetModal()" class="group flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 border border-red-100 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all active:scale-95">
+                    Reiniciar Todo
+                </button>
+            </div>
+        </main>
+
+        <footer class="p-6 text-center text-slate-300 text-[9px] uppercase font-black tracking-[0.2em]">
+            Salvador 2026 • Familia
+        </footer>
     </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev" aria-label="Anterior"></div>
-    <div class="swiper-button-next" aria-label="Siguiente"></div>
-  </div>
-</section>
 
-<main>
-  <div class="card info-card">
-    <h3>Info</h3>
-    <p><strong>Fecha de partida:</strong> 03/03/2026</p>
-  </div>
-</main>
+    <!-- Modal de Éxito (100%) -->
+    <div id="success-modal" class="fixed inset-0 z-[200] bg-blue-600/90 backdrop-blur-md flex items-center justify-center p-6 hidden">
+        <div class="text-center text-white">
+            <div class="text-7xl mb-4 animate-bounce">✈️</div>
+            <h2 class="text-3xl font-black mb-2">¡Todo Listo!</h2>
+            <p class="text-blue-100 mb-8">Ya tenés todo lo necesario para Salvador.</p>
+            <button onclick="closeSuccessModal()" class="bg-white text-blue-600 px-8 py-3 rounded-2xl font-bold uppercase tracking-widest shadow-xl">Genial</button>
+        </div>
+    </div>
 
-<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
-<script src="script.js"></script>
+    <!-- Modal de Reinicio -->
+    <div id="reset-modal" class="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-6 hidden">
+        <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-xs shadow-2xl scale-95 transition-all">
+            <h3 class="text-xl font-bold text-center text-slate-800 mb-2">¿Borrar todo?</h3>
+            <p class="text-sm text-center text-slate-500 mb-8">Esta acción desmarcará todos los ítems guardados.</p>
+            <div class="flex flex-col gap-2">
+                <button onclick="confirmReset()" class="w-full py-4 bg-red-600 text-white font-bold rounded-2xl text-sm active:scale-95 transition-all shadow-lg shadow-red-200">Sí, borrar todo</button>
+                <button onclick="closeResetModal()" class="w-full py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl text-sm active:scale-95 transition-all">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
