@@ -5,7 +5,7 @@ body {
     -webkit-tap-highlight-color: transparent; 
 }
 
-/* Lógica del Acordeón */
+/* Acordeón */
 .accordion-content {
     max-height: 0;
     overflow: hidden;
@@ -25,7 +25,7 @@ body {
     transform: rotate(180deg);
 }
 
-/* Checkbox Personalizado */
+/* Checkbox */
 .checkbox-custom {
     appearance: none;
     width: 1.6em;
@@ -53,23 +53,28 @@ body {
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 
-.checkbox-custom:checked::before { 
-    transform: scale(1); 
-}
-
-.checkbox-custom:checked + span { 
+.checkbox-custom:checked::before { transform: scale(1); }
+.checkbox-custom:checked + .item-text { 
     text-decoration: line-through; 
     color: #94a3b8; 
     opacity: 0.7; 
 }
 
-/* Animaciones de Progreso */
-.progress-fill { 
-    transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); 
+/* Animaciones */
+.progress-fill { transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.success-glow { color: #fbbf24 !important; filter: drop-shadow(0 0 5px rgba(251,191,36,0.5)); transform: scale(1.05); }
+
+/* Ítems Dinámicos */
+.delete-btn {
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
-.success-glow { 
-    color: #fbbf24 !important; 
-    filter: drop-shadow(0 0 5px rgba(251,191,36,0.5)); 
-    transform: scale(1.05); 
+label:hover .delete-btn {
+    opacity: 1;
+}
+
+/* Soporte para táctiles (mostrar siempre eliminar) */
+@media (hover: none) {
+    .delete-btn { opacity: 1; }
 }
