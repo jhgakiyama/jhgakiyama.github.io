@@ -1,14 +1,17 @@
 /**
- * Salvador 2026 - Dynamic Checklist Logic (Fixed Accordion)
+ * Salvador 2026 - Dynamic Checklist Logic
+ * Simplified version with Backpack category
  */
 
 const TARGET_DATE = new Date("March 1, 2026 00:00:00").getTime();
 const STORAGE_KEY = 'salvador_2026_dynamic_data';
 let successCelebrated = false;
 
+// Datos maestros con todas las categorías incluidas
 const defaultData = [
     { id: 'ad', title: "Maleta Adultos", icon: "👜", color: "border-l-indigo-500", items: ["3 Trajes de baño p/u", "7 Remeras/Musculosas", "3 Shorts/Bermudas", "2 Outfits noche", "Ropa interior (15 d)", "Pijama liviano", "Ojotas/Calzado", "Gafas y Sombreros"].map(name => ({ name, checked: false })) },
     { id: 'ni', title: "Maleta Niña", icon: "🧸", color: "border-l-pink-500", items: ["12 Cambios ropa", "3 Remeras UV", "3 Mallas infantiles", "Sandalias/Crocs", "Pañales (inicio)", "Neceser familiar", "Protector solar 50+", "Repelente insectos", "Toallas microfibra"].map(name => ({ name, checked: false })) },
+    { id: 'mo', title: "Mochila Viajera", icon: "🎒", color: "border-l-yellow-500", items: ["Botella de agua térmica", "Protector solar facial", "Repelente (refuerzo)", "Cargador portátil (Powerbank)", "Toallitas húmedas", "Bolsa impermeable p/celular", "Alcohol en gel", "Snacks / Barras de cereal", "Gorra o Piluso extra", "Dinero en efectivo (Reales)"].map(name => ({ name, checked: false })) },
     { id: 'ma', title: "Mano (Carry On)", icon: "✈️", color: "border-l-emerald-500", items: ["Muda ropa extra x3", "Pasaportes/DNI", "Seguros/Reservas", "Cargadores/Powerbank", "Tablet niña", "Abrigo liviano"].map(name => ({ name, checked: false })) },
     { id: 'mt', title: "Equipo Mate", icon: "🧉", color: "border-l-orange-500", items: ["Termo (vacío)", "Mate y bombilla", "Yerba (sellada)", "Azúcar/Edulcorante"].map(name => ({ name, checked: false })) },
     { id: 'bt', title: "Botiquín Niña", icon: "🏥", color: "border-l-red-500", items: ["Termómetro", "Ibuprofeno/Paracet.", "Antihistamínico", "Sales rehidratación", "Curitas/Gasas", "Post-solar/Aloe"].map(name => ({ name, checked: false })) }
@@ -18,6 +21,7 @@ let appState = [];
 
 function init() {
     const saved = localStorage.getItem(STORAGE_KEY);
+    // Carga directa: o lo guardado o lo nuevo por defecto
     appState = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultData));
     
     renderAll();
@@ -29,7 +33,7 @@ function renderAll() {
     const container = document.getElementById('app-content');
     if (!container) return;
 
-    // Guardamos qué acordeones estaban abiertos antes de re-renderizar
+    // Persistencia visual de los acordeones abiertos
     const openSections = Array.from(document.querySelectorAll('.accordion-content.is-open')).map(el => el.id.replace('content-', ''));
 
     container.innerHTML = appState.map(section => `
@@ -83,7 +87,6 @@ function renderAll() {
         </div>
     `).join('');
 
-    // Ajustamos la altura de los que deben estar abiertos tras el render
     openSections.forEach(id => {
         const content = document.getElementById(`content-${id}`);
         if (content) content.style.maxHeight = content.scrollHeight + "px";
@@ -95,8 +98,6 @@ function renderAll() {
 window.handleToggle = (id) => {
     const content = document.getElementById(`content-${id}`);
     const chevron = document.getElementById(`chevron-${id}`);
-    
-    // Si no tiene maxHeight definido inline, lo inicializamos basado en la clase
     if (!content.style.maxHeight || content.style.maxHeight === '0px') {
         content.style.maxHeight = content.scrollHeight + "px";
         content.classList.add('is-open');
@@ -179,17 +180,14 @@ function updateCountdown() {
     const now = new Date().getTime();
     const distance = TARGET_DATE - now;
     if (distance < 0) return;
-    
     const d = Math.floor(distance / (1000 * 60 * 60 * 24));
     const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const s = Math.floor((distance % (1000 * 60)) / 1000);
-
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minsEl = document.getElementById("minutes");
     const secsEl = document.getElementById("seconds");
-
     if (daysEl) daysEl.innerText = d.toString().padStart(2, '0');
     if (hoursEl) hoursEl.innerText = h.toString().padStart(2, '0');
     if (minsEl) minsEl.innerText = m.toString().padStart(2, '0');
@@ -202,7 +200,7 @@ window.showResetModal = () => document.getElementById('reset-modal')?.classList.
 window.closeResetModal = () => document.getElementById('reset-modal')?.classList.add('hidden');
 window.confirmReset = () => {
     localStorage.removeItem(STORAGE_KEY);
-    init();
+    init(); // Reinicia cargando defaultData directamente
     closeResetModal();
 };
 
